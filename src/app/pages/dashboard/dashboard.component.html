@@ -1,0 +1,48 @@
+<mat-toolbar class="top-navbar" color="primary">
+    <button mat-icon-button (click)="sidenav.toggle()" class="menu-button">
+        <mat-icon>menu</mat-icon>
+    </button>
+    <span class="app-title">EmployeeHub</span>
+    <span class="spacer"></span>
+</mat-toolbar>
+
+<!-- Moved below toolbar -->
+<div class="main-container">
+    <mat-sidenav-container class="sidenav-container">
+        <mat-sidenav #sidenav mode="side" class="sidenav">
+            <div class="sidenav-header">
+                <h3>Menu</h3>
+            </div>
+            <mat-nav-list (click)="navigateToRoute('dashboard')">
+                <mat-icon>home</mat-icon>
+                <h3>Home</h3>
+            </mat-nav-list>
+            <mat-nav-list (click)="navigateToRoute('create')">
+                <mat-icon>add</mat-icon>
+                <h3>Add Employee</h3>
+            </mat-nav-list>
+            <mat-nav-list (click)="navigateToRoute('employees')">
+                <mat-icon>badge</mat-icon>
+                <h3>Employees</h3>
+            </mat-nav-list>
+        </mat-sidenav>
+
+        <mat-sidenav-content class="main-content">
+            <div class="content-wrapper">
+                <router-outlet></router-outlet>
+
+                <section>
+                    <div>
+                        <h2>Employees Dashboard</h2>
+                    </div>
+                    <article>
+                        <article class="container" id="main">
+                        </article>
+                        <article id="barChart" class="container">
+                        </article>
+                    </article>
+                </section>
+            </div>
+        </mat-sidenav-content>
+    </mat-sidenav-container>
+</div>

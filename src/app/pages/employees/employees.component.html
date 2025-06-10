@@ -1,0 +1,111 @@
+<mat-toolbar class="top-navbar" color="primary">
+    <button mat-icon-button (click)="sidenav.toggle()" class="menu-button">
+        <mat-icon>menu</mat-icon>
+    </button>
+    <span class="app-title">EmployeeHub</span>
+    <span class="spacer"></span>
+</mat-toolbar>
+
+<div class="main-container">
+    <mat-sidenav-container class="sidenav-container">
+        <mat-sidenav #sidenav mode="side" class="sidenav">
+            <div class="sidenav-header">
+                <h3>Menu</h3>
+            </div>
+            <mat-nav-list (click)="navigateToRoute('dashboard')">
+                <mat-icon>home</mat-icon>
+                <h3>Home</h3>
+            </mat-nav-list>
+            <mat-nav-list (click)="navigateToRoute('create')">
+                <mat-icon>add</mat-icon>
+                <h3>Add Employee</h3>
+            </mat-nav-list>
+            <mat-nav-list (click)="navigateToRoute('employees')">
+                <mat-icon>badge</mat-icon>
+                <h3>Employees</h3>
+            </mat-nav-list>
+        </mat-sidenav>
+
+        <mat-sidenav-content class="main-content">
+            <div class="content-wrapper">
+                <router-outlet *ngIf="!showEditMode"></router-outlet>
+
+                <app-create 
+                    *ngIf="showEditMode" 
+                    [editMode]="true" 
+                    [employeeData]="selectedEmployeeForEdit"
+                    (editComplete)="onEditComplete()">
+                </app-create>
+
+                <div *ngIf="!showEditMode">
+                    <div class="heading-container">
+                        <h2>Employees Information</h2>
+                    </div>
+
+                    <section *ngIf="isEmployeesDataPresent" data-aos="fade-up">
+                        <table mat-table [dataSource]="employees" class="mat-elevation-z8">
+
+                            <ng-container matColumnDef="S.No">
+                                <th mat-header-cell *matHeaderCellDef> S.No </th>
+                                <td mat-cell *matCellDef="let element; let i = index"> {{i + 1}} </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="Name">
+                                <th mat-header-cell *matHeaderCellDef> Name </th>
+                                <td mat-cell *matCellDef="let element"> {{element.firstname + ' ' + element.lastname}} </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="Phone Number">
+                                <th mat-header-cell *matHeaderCellDef> Phone Number </th>
+                                <td mat-cell *matCellDef="let element"> {{element.phone}} </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="Role">
+                                <th mat-header-cell *matHeaderCellDef> Role </th>
+                                <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="Employee ID">
+                                <th mat-header-cell *matHeaderCellDef> Employee ID </th>
+                                <td mat-cell *matCellDef="let element"> {{element.employeeid}} </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="City">
+                                <th mat-header-cell *matHeaderCellDef> City </th>
+                                <td mat-cell *matCellDef="let element"> {{element.city}} </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="State">
+                                <th mat-header-cell *matHeaderCellDef> State </th>
+                                <td mat-cell *matCellDef="let element"> {{element.state}} </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="Address">
+                                <th mat-header-cell *matHeaderCellDef> Address </th>
+                                <td mat-cell *matCellDef="let element"> {{element.address}} </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="More Details">
+                                <th mat-header-cell *matHeaderCellDef> Actions </th>
+                                <td mat-cell *matCellDef="let element"> 
+                                    <button (click)="openMoreDetails(element.employeeid)">More Details</button>
+                                    <button (click)="editEmployee(element)">Edit</button>
+                                    <button (click)="deleteEmployee(element.employeeid)" class="deleteButton">Delete</button>
+                                </td>
+                            </ng-container>
+
+                            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                        </table>
+                        <mat-paginator [length]="employees.length" [pageSize]="5" [pageSizeOptions]="[5, 10, 25, 100]"
+                            aria-label="Select page" class="mat-paginator">
+                        </mat-paginator>
+                    </section>
+                    <section *ngIf="!isEmployeesDataPresent" class="spinnerSection">
+                        <mat-spinner></mat-spinner>
+                    </section>
+                </div>
+            </div>
+        </mat-sidenav-content>
+    </mat-sidenav-container>
+</div>

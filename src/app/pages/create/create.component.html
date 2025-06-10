@@ -1,0 +1,185 @@
+<mat-toolbar class="top-navbar" color="primary">
+    <button mat-icon-button (click)="sidenav.toggle()" class="menu-button">
+        <mat-icon>menu</mat-icon>
+    </button>
+    <span class="app-title">EmployeeHub</span>
+    <span class="spacer"></span>
+</mat-toolbar>
+
+<div class="main-container">
+    <mat-sidenav-container class="sidenav-container">
+        <mat-sidenav #sidenav mode="side" class="sidenav">
+            <div class="sidenav-header">
+                <h3>Menu</h3>
+            </div>
+            <mat-nav-list (click)="navigateToRoute('dashboard')">
+                <mat-icon>home</mat-icon>
+                <h3>Home</h3>
+            </mat-nav-list>
+            <mat-nav-list (click)="navigateToRoute('create')">
+                <mat-icon>add</mat-icon>
+                <h3>Add Employee</h3>
+            </mat-nav-list>
+            <mat-nav-list (click)="navigateToRoute('employees')">
+                <mat-icon>badge</mat-icon>
+                <h3>Employees</h3>
+            </mat-nav-list>
+        </mat-sidenav>
+
+        <mat-sidenav-content class="main-content">
+            <div class="content-wrapper">
+                <router-outlet></router-outlet>
+
+                <section>
+                    <article data-aos="fade-up">
+                        <h2><i class="fa-solid fa-user-tie"></i> Personal Information</h2>
+                        <form [formGroup]="employeeForm">
+                            <div class="form-grid">
+                                <mat-form-field appearance="fill">
+                                    <mat-label>First Name</mat-label>
+                                    <input matInput formControlName="firstName" placeholder="Enter your First Name">
+                                </mat-form-field>
+
+                                <mat-form-field appearance="fill">
+                                    <mat-label>Last Name</mat-label>
+                                    <input matInput formControlName="lastName" placeholder="Enter your Last Name">
+                                </mat-form-field>
+
+                                <mat-form-field appearance="fill">
+                                    <mat-label>Employee ID</mat-label>
+                                    <input matInput formControlName="employeeID" placeholder="Enter your Employee ID">
+                                </mat-form-field>
+
+                                <mat-form-field appearance="fill">
+                                    <mat-label>Date of Birth</mat-label>
+                                    <input matInput [matDatepicker]="picker" formControlName="dateOfBirth">
+                                    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                                    <mat-datepicker #picker></mat-datepicker>
+                                </mat-form-field>
+
+                                <mat-form-field appearance="fill">
+                                    <mat-label>Upload File</mat-label>
+                                    <input matInput readonly [value]="selectedFile?.name || ''"
+                                        (click)="fileInput.click()" placeholder="Click to select file"
+                                        formControlName="uploadFile" />
+                                    <mat-icon matSuffix>attach_file</mat-icon>
+                                </mat-form-field>
+
+                                <input #fileInput type="file" style="display: none;" (change)="onFileSelected($event)"
+                                    accept=".pdf,.doc,.docx,.jpg,.png" />
+
+                            </div>
+                            <h2><i class="fa-solid fa-address-card"></i> Contact Information</h2>
+                            <div class="form-grid">
+                                <mat-form-field appearance="fill">
+                                    <mat-label>Email</mat-label>
+                                    <input matInput formControlName="email" placeholder="Enter your Email Address">
+                                </mat-form-field>
+                                <mat-form-field appearance="fill">
+                                    <mat-label>Phone Number</mat-label>
+                                    <input matInput formControlName="phone" placeholder="Enter your Phone Number">
+                                </mat-form-field>
+                                <mat-form-field appearance="fill">
+                                    <mat-label>Address</mat-label>
+                                    <input matInput formControlName="address" placeholder="Enter your Address">
+                                </mat-form-field>
+                                <mat-form-field appearance="fill">
+                                    <mat-label>City</mat-label>
+                                    <input matInput formControlName="city" placeholder="Enter your City">
+                                </mat-form-field>
+                                <mat-form-field appearance="fill">
+                                    <mat-label>State</mat-label>
+                                    <input matInput formControlName="state" placeholder="Enter your State">
+                                </mat-form-field>
+                                <mat-form-field appearance="fill">
+                                    <mat-label>Pin Code</mat-label>
+                                    <input matInput formControlName="pinCode" placeholder="Enter your State">
+                                </mat-form-field>
+                            </div>
+                            <h2><i class="fa-solid fa-briefcase"></i> Job Information</h2>
+                            <div class="form-grid">
+                                <mat-form-field appearance="fill">
+                                    <mat-label>Position</mat-label>
+                                    <input matInput formControlName="position" placeholder="Enter your Position">
+                                </mat-form-field>
+                                <mat-form-field>
+                                    <mat-label>Department</mat-label>
+                                    <mat-select formControlName="department">
+                                        <mat-option value="Information Technology">Information Technology</mat-option>
+                                        <mat-option value="Human Resources">Human Resources</mat-option>
+                                        <mat-option value="Finance">Finance</mat-option>
+                                        <mat-option value="Sales">Sales</mat-option>
+                                        <mat-option value="Operations">Operations</mat-option>
+                                        <mat-option value="Marketing">Marketing</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                                <mat-form-field appearance="fill">
+                                    <mat-label>Hire Date</mat-label>
+                                    <input matInput [matDatepicker]="pickerE" formControlName="hireDate">
+                                    <mat-datepicker-toggle matIconSuffix [for]="pickerE"></mat-datepicker-toggle>
+                                    <mat-datepicker #pickerE></mat-datepicker>
+                                </mat-form-field>
+                                <mat-form-field appearance="fill">
+                                    <mat-label>Salary</mat-label>
+                                    <input matInput formControlName="salary" placeholder="Enter your Salary">
+                                </mat-form-field>
+                                <mat-form-field appearance="fill">
+                                    <mat-label>Employment Status</mat-label>
+                                    <mat-select formControlName="employmentStatus">
+                                        <mat-option value="active">Active</mat-option>
+                                        <mat-option value="inactive">Inactive</mat-option>
+                                        <mat-option value="onLeave">On Leave</mat-option>
+                                        <mat-option value="terminated">Terminated</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                                <mat-form-field appearance="fill">
+                                    <mat-label>Employment Type</mat-label>
+                                    <mat-select formControlName="employmentType">
+                                        <mat-option value="fullTime">Full-Time</mat-option>
+                                        <mat-option value="partTime">Part-Time</mat-option>
+                                        <mat-option value="contract">Contract</mat-option>
+                                        <mat-option value="intern">Intern</mat-option>
+                                        <mat-option value="freelancer">Freelancer</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+
+                            </div>
+                            <h2><i class="fa-solid fa-circle-exclamation"></i> Emergency Contact</h2>
+                            <div class="form-grid">
+                                <mat-form-field appearance="fill">
+                                    <mat-label>Contact Name</mat-label>
+                                    <input matInput formControlName="contactName">
+                                </mat-form-field>
+                                <mat-form-field appearance="fill">
+                                    <mat-label>Contact Phone</mat-label>
+                                    <input matInput formControlName="contactPhone">
+                                </mat-form-field>
+                                <mat-form-field appearance="fill">
+                                    <mat-label>Alternate Phone</mat-label>
+                                    <input matInput formControlName="alternatePhone">
+                                </mat-form-field>
+                                <mat-form-field appearance="fill">
+                                    <mat-label>Relationship</mat-label>
+                                    <mat-select formControlName="emergencyContactRelationship">
+                                        <mat-option value="parent">Parent</mat-option>
+                                        <mat-option value="spouse">Spouse</mat-option>
+                                        <mat-option value="sibling">Sibling</mat-option>
+                                        <mat-option value="friend">Friend</mat-option>
+                                        <mat-option value="other">Other</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+
+                            </div>
+                        </form>
+                    </article>
+                    <div class="button-container">
+                        @if (editMode) {
+                        <button (click)="enableEditMode()">Edit</button>
+                        }
+                        <button (click)="submitForm()">{{editMode ? 'Update Employee' : 'Add Employee'}}</button>
+                    </div>
+                </section>
+            </div>
+        </mat-sidenav-content>
+    </mat-sidenav-container>
+</div>

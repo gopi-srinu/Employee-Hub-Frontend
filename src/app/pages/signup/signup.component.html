@@ -1,0 +1,61 @@
+<section>
+    <article>
+        <img src="/Sign up-rafiki.png" alt="">
+    </article>
+    <article>
+        <form [formGroup]="signupForm">
+            <mat-form-field appearance="fill">
+                <mat-label>First Name</mat-label>
+                <input matInput formControlName="firstName">
+            </mat-form-field>
+            @if(signupForm.get('firstName')?.touched && signupForm.get('firstName')?.invalid) {
+            <p class="errorMessage"><i class="fa-solid fa-circle-exclamation"></i> First Name is required</p>
+            }
+            <mat-form-field appearance="fill">
+                <mat-label>Last Name</mat-label>
+                <input matInput formControlName="lastName">
+            </mat-form-field>
+            @if(signupForm.get('lastName')?.touched && signupForm.get('lastName')?.invalid) {
+                <p class="errorMessage"><i class="fa-solid fa-circle-exclamation"></i> Last Name is required</p>
+            }
+            <mat-form-field appearance="fill">
+                <mat-label>Email</mat-label>
+                <input matInput formControlName="email">
+            </mat-form-field>
+            @if(signupForm.get('email')?.touched && signupForm.get('email')?.invalid) {
+                <p class="errorMessage"><i class="fa-solid fa-circle-exclamation"></i> Email is required</p>
+            }
+            <mat-form-field appearance="fill">
+                <mat-label>Mobile Number</mat-label>
+                <input matInput formControlName="mobileNumber">
+            </mat-form-field>
+            @if(signupForm.get('mobileNumber')?.touched && signupForm.get('mobileNumber')?.invalid) {
+                <p class="errorMessage"><i class="fa-solid fa-circle-exclamation"></i> Mobile Number is required</p>
+            }
+            <mat-form-field appearance="fill">
+                <mat-label>Enter your password</mat-label>
+                <input matInput [type]="hide() ? 'password' : 'text'" formControlName="password" />
+                <button matIconButton matSuffix (click)="clickEvent($event)" [attr.aria-label]="'Hide password'"
+                    [attr.aria-pressed]="hide()">
+                    <mat-icon>{{hide() ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
+            </mat-form-field>
+            @if(signupForm.get('password')?.touched && signupForm.get('password')?.invalid) {
+                <p class="errorMessage"><i class="fa-solid fa-circle-exclamation"></i> Password is required</p>
+            }
+            <mat-form-field appearance="fill">
+                <mat-label>Re-Enter your password</mat-label>
+                <input matInput [type]="hide() ? 'password' : 'text'" formControlName="reenterPassword" />
+                <button matIconButton matSuffix (click)="clickEvent($event)" [attr.aria-label]="'Hide password'"
+                    [attr.aria-pressed]="hide()">
+                    <mat-icon>{{hide() ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
+            </mat-form-field>
+            @if(signupForm.get('password')?.value !== signupForm.get('reenterPassword')?.value) {
+            <p class="errorMessage"><i class="fa-solid fa-circle-exclamation"></i> Passwords do not match</p>
+            }
+            <button (click)="submitForm()">Signup</button>
+            <p class="login">Already have an account ? <a href="/login">Login</a></p>
+        </form>
+    </article>
+</section>

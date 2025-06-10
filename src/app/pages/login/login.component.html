@@ -1,0 +1,29 @@
+<section>
+    <article>
+        <form [formGroup]="loginForm">
+            <mat-form-field appearance="fill">
+                <mat-label>Email</mat-label>
+                <input matInput formControlName="email">
+            </mat-form-field>
+            @if(loginForm.get('email')?.touched && loginForm.get('email')?.invalid) {
+            <p class="errorMessage"><i class="fa-solid fa-circle-exclamation"></i> Email is required</p>
+            }
+            <mat-form-field appearance="fill">
+                <mat-label>Password</mat-label>
+                <input matInput [type]="hide() ? 'password' : 'text'" formControlName="password" />
+                <button matIconButton matSuffix (click)="clickEvent($event)" [attr.aria-label]="'Hide password'"
+                    [attr.aria-pressed]="hide()">
+                    <mat-icon>{{hide() ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
+            </mat-form-field>
+            @if(loginForm.get('password')?.touched && loginForm.get('password')?.invalid) {
+            <p class="errorMessage"><i class="fa-solid fa-circle-exclamation"></i> Password is required</p>
+            }
+            <button (click)="login()">Login</button>
+            <p class="accountLink">Don't have an account ? <a href="/signup">Signup</a></p>
+        </form>
+    </article>
+    <article>
+        <img src="/Tablet login-amico.png" alt="login_image">
+    </article>
+</section>

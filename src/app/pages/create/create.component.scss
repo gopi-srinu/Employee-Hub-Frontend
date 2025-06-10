@@ -1,0 +1,180 @@
+:host {
+  display: block;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* Top Navbar */
+.top-navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 64px;
+  z-index: 1000;
+  background-color: #1976d2;
+  color: white;
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.menu-button {
+  margin-right: 16px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.app-title {
+  font-size: 20px;
+  font-weight: 500;
+  margin-right: 24px;
+  font-family: "Montserrat", sans-serif;
+
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+/* Layout */
+.main-container {
+  margin-top: 64px;
+  /* space for fixed toolbar */
+  height: calc(100vh - 64px);
+}
+
+.sidenav-container {
+  height: 100%;
+}
+
+.mat-sidenav-container {
+  background: #fff;
+}
+
+.sidenav {
+  width: 280px;
+  background: #fafafa;
+  border-right: 1px solid #e0e0e0;
+}
+
+.sidenav-header {
+  padding: 16px 24px;
+  border-bottom: 1px solid #e0e0e0;
+  background: #f5f5f5;
+}
+
+.sidenav-header h3 {
+  margin: 0;
+  font-weight: 500;
+  color: #333;
+}
+
+/* Nav List */
+mat-nav-list {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  cursor: pointer;
+
+  h3 {
+    width: max-content;
+  }
+}
+
+mat-nav-list:hover {
+  background-color: lightgrey;
+}
+
+/* Main Content */
+.main-content {
+  overflow: auto;
+  height: 100%;
+}
+
+.content-wrapper {
+  padding: 24px;
+  min-height: 100%;
+}
+
+/* Section Content */
+
+section {
+  width: 100%;
+  height: 100%;
+
+  article {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    h2 {
+      font-size: 1.8rem;
+      font-family: "Montserrat", sans-serif;
+    }
+
+    form {
+      width: 80%;
+
+      h2 {
+        text-align: center;
+      }
+
+      div {
+        width: 100%;
+        height: 100%;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(2, 1fr);
+        gap: 1rem;
+        padding: 1.2rem;
+
+
+        mat-form-field {
+          font-family: "Montserrat", sans-serif;
+          font-weight: 600;
+          font-size: 1.2rem;
+
+          mat-select {
+            mat-option {
+              font-size: 1.2rem;
+              font-weight: 600;
+            }
+          }
+
+          mat-label {
+            font-family: "Montserrat", sans-serif;
+            font-weight: 600;
+            font-size: 1.2rem;
+          }
+        }
+      }
+    }
+
+  }
+
+  .button-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+
+    button {
+      padding: 1.2rem;
+      background-color: #14213d;
+      color: white;
+      border: none;
+      font-weight: 600;
+      border-radius: 0.3rem;
+      cursor: pointer;
+    }
+  }
+}
